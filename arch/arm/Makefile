@@ -118,6 +118,7 @@ board-$(CONFIG_MACH_TX28)			:= karo-tx28
 board-$(CONFIG_MACH_MX28EVK)			:= freescale-mx28-evk
 board-$(CONFIG_MACH_FREESCALE_MX51_PDK)		:= freescale-mx51-pdk
 board-$(CONFIG_MACH_FREESCALE_MX53_LOCO)	:= freescale-mx53-loco
+board-$(CONFIG_MACH_FREESCALE_MX53_SELLWOOD)	:= freescale-mx53-sellwood
 board-$(CONFIG_MACH_FREESCALE_MX53_SMD)		:= freescale-mx53-smd
 board-$(CONFIG_MACH_GUF_CUPID)			:= guf-cupid
 board-$(CONFIG_MACH_MINI2440)			:= mini2440
