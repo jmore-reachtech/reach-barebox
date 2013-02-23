@@ -318,3 +318,21 @@ int imx_iim_read(unsigned int bank, int offset, void *buf, int count)
 
 	return ret;
 }
+
+int imx_iim_write(unsigned int bank, int offset, void *buf, int count)
+{
+	struct cdev *cdev;
+	char *name = asprintf(DRIVERNAME "_bank%d", bank);
+	int ret;
+
+	cdev = cdev_open(name, O_RDWR);
+	if (!cdev)
+		return -ENODEV;
+
+	ret = cdev_write(cdev, buf, count, offset, 0);
+
+	cdev_close(cdev);
+	free(name);
+
+	return ret;
+}

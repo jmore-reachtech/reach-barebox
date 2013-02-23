@@ -10,6 +10,17 @@ if COMMAND_SUPPORT
 
 menu "commands                      "
 
+menu "Reach                         "
+
+config CMD_REACH_FEC
+	tristate
+	prompt "fec"
+	help
+		Read and write the MAC address.
+
+endmenu
+
+
 menu "scripting                     "
 
 config CMD_EDIT
