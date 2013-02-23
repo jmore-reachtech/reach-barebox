@@ -119,7 +119,6 @@ static int do_fec_write(char *ether_addr)
 	u32 reg;
 	char buf[6]		= {0};
 
-	ret = string_to_ethaddr(ether_addr,ether);
 	ret = imx_iim_read(1,9,buf,6);
 	if(buf[0] != 0x0) {
 		printf("mac already set: %02x:%02x:%02x:%02x:%02x:%02x\n",
@@ -127,6 +126,7 @@ static int do_fec_write(char *ether_addr)
 		return 0;
 	}
 
+	ret = string_to_ethaddr(ether_addr,ether);
 	if(ret) {
 		printf("invalid MAC address\n");
 		return -1;
@@ -143,7 +143,6 @@ static int do_fec_write(char *ether_addr)
 
 	/* set the efuse_prog_supply_gate bit */
 	reg = readl(MX53_CCM_BASE_ADDR + MX5_CCM_CGPR);
-	printf("efuse gate reg=0x%08X\n",reg);
 	reg |= 0x000000010;
 	writel(reg,(MX53_CCM_BASE_ADDR + MX5_CCM_CGPR));
 
@@ -159,7 +158,6 @@ static int do_fec_write(char *ether_addr)
 
 	/* clear the efuse_prog_supply_gate bit */
 	reg = readl(MX53_CCM_BASE_ADDR + MX5_CCM_CGPR);
-	printf("efuse gate reg=0x%08X\n",reg);
 	reg &= ~(0x000000010);
 	writel(reg,(MX53_CCM_BASE_ADDR + MX5_CCM_CGPR));
 
