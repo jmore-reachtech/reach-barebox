@@ -52,6 +52,14 @@ static struct pad_desc sellwood_pads[] = {
 	MX53_PAD_CSI0_DAT10__UART1_TXD_MUX,
 	MX53_PAD_CSI0_DAT11__UART1_RXD_MUX,
 
+	/* UART2 */
+	MX53_PAD_PATA_DMARQ__UART2_TXD_MUX,
+	MX53_PAD_PATA_BUFFER_EN__UART2_RXD_MUX,
+
+	/* UART3 */
+	MX53_PAD_PATA_CS_0__UART3_TXD_MUX,
+	MX53_PAD_PATA_CS_1__UART3_RXD_MUX,
+
 	/* FEC */
 	MX53_PAD_FEC_MDC__FEC_MDC,
 	MX53_PAD_FEC_MDIO__FEC_MDIO,
@@ -183,7 +191,16 @@ static int sellwood_console_init(void)
 
 	imx53_init_lowlevel(1000);
 
+#if defined CONFIG_MX53_SELLWOOD_DEBUG_UART0
 	imx53_add_uart0();
+#endif	
+#if defined CONFIG_MX53_SELLWOOD_DEBUG_UART1
+	imx53_add_uart1();
+#endif
+#if defined CONFIG_MX53_SELLWOOD_DEBUG_UART2
+	imx53_add_uart2();
+#endif
+
 	return 0;
 }
 

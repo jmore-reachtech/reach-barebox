@@ -480,6 +480,22 @@ endchoice
 endif
 endmenu
 
+menu "Reach specific settings        "
+
+if MACH_FREESCALE_MX53_SELLWOOD
+choice
+	prompt "Debug console UART"
+config MX53_SELLWOOD_DEBUG_UART0
+	bool "UART0"
+config MX53_SELLWOOD_DEBUG_UART1
+	bool "UART1"
+config MX53_SELLWOOD_DEBUG_UART2
+	bool "UART2"
+endchoice
+endif
+endmenu
+
+
 menu "i.MX specific settings        "
 
 config IMX_CLKO
