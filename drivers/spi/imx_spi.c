@@ -14,6 +14,8 @@
  *
  */
 
+#define DEBUG
+
 #include <common.h>
 #include <init.h>
 #include <driver.h>
@@ -533,6 +535,7 @@ static int imx_spi_probe(struct device_d *dev)
 
 	master = &imx->master;
 	master->dev = dev;
+	master->bus_num = dev->id;
 
 	master->setup = imx_spi_setup;
 	master->transfer = imx_spi_transfer;
