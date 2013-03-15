@@ -214,9 +214,8 @@ static int sellwood_part_init(void)
 	//devfs_add_partition("disk0", 0x00000, 0x40000, DEVFS_PARTITION_FIXED, "self0");
 	//devfs_add_partition("disk0", 0x40000, 0x20000, DEVFS_PARTITION_FIXED, "env0");
 	
-	devfs_add_partition("m25p0", 0, SZ_256K, DEVFS_PARTITION_FIXED, "self0");
-	devfs_add_partition("m25p0", SZ_256K, SZ_256K, DEVFS_PARTITION_FIXED, "env0");
-	devfs_add_partition("m25p0", SZ_512K, 0x00300000, DEVFS_PARTITION_FIXED, "kernel");
+	devfs_add_partition("nor0", 0, SZ_256K, DEVFS_PARTITION_FIXED, "self0");
+	devfs_add_partition("nor0", SZ_256K, SZ_128K, DEVFS_PARTITION_FIXED, "env0");
 
 	return 0;
 }

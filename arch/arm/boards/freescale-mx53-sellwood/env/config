@@ -1,13 +1,12 @@
 #!/bin/sh
 
-global.hostname=loco
-eth0.serverip=
-user=
+global.hostname=sellwood
+eth0.serverip=192.168.0.138
 
 # use 'dhcp' to do dhcp in barebox and in kernel
 # use 'none' if you want to skip kernel ip autoconfiguration
 ip=dhcp
-global.dhcp.vendor_id=barebox-mx53-loco
+global.dhcp.vendor_id=barebox-mx53-sellwood
 
 # or set your networking parameters here
 #eth0.ipaddr=a.b.c.d
@@ -16,7 +15,7 @@ global.dhcp.vendor_id=barebox-mx53-loco
 #eth0.serverip=a.b.c.d
 
 # can be either 'nfs', 'tftp', 'nor' or 'nand'
-kernel_loc=tftp
+kernel_loc=nor
 # can be either 'net', 'nor', 'nand' or 'initrd'
 rootfs_loc=net
 
@@ -24,7 +23,7 @@ rootfs_loc=net
 rootfs_type=ubifs
 rootfsimage=root-${global.hostname}.$rootfs_type
 
-kernelimage=zImage-${global.hostname}
+kernelimage=linuximage
 #kernelimage=uImage-${global.hostname}
 #kernelimage=Image-${global.hostname}
 #kernelimage=Image-${global.hostname}.lzo
@@ -34,14 +33,15 @@ if [ -n $user ]; then
 	nfsroot="$eth0.serverip:/home/$user/nfsroot/${global.hostname}"
 	rootfsimage="$user"-"$rootfsimage"
 else
-	nfsroot="$eth0.serverip:/path/to/nfs/root"
+	nfsroot="$eth0.serverip:/home/reach/Ptxdist/projects/rootfs"
 fi
 
 autoboot_timeout=3
 
 bootargs="console=ttymxc0,115200"
 
-disk_parts="256k(barebox)ro,128k(bareboxenv),4M(kernel),-(root)"
+disk_parts="256k(barebox),128k(bareboxenv),4M(kernel),-(root)"
+nor_parts="256k(barebox),128k(bareboxenv),3M(kernel)"
 
 # set a fancy prompt (if support is compiled in)
 PS1="\e[1;32mbarebox@\e[1;31m\h:\w\e[0m "

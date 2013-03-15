@@ -877,7 +877,7 @@ static int m25p_probe(struct device_d *dev)
 	if (data && data->name)
 		flash->mtd.name = data->name;
 	else
-		flash->mtd.name = "m25p";
+		flash->mtd.name = "nor";
 
 	flash->mtd.type = MTD_NORFLASH;
 	flash->mtd.writesize = 1;
