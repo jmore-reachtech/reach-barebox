@@ -553,6 +553,26 @@ config FREESCALE_MX25_3STACK_SDRAM_128MB_MDDR
 	bool "128 MB (mDDR)"
 endchoice
 endif
+if MACH_FREESCALE_MX53_SELLWOOD
+	choice
+		prompt "Environment location"
+config FREESCALE_MX53_SELLWOOD_ENV_NOR
+	bool "NOR"
+config FREESCALE_MX53_SELLWOOD_ENV_SD
+	bool "SD"
+endchoice
+endif
+if MACH_FREESCALE_MX53_SELLWOOD
+	choice
+		prompt "Debug UART"
+config MX53_SELLWOOD_DEBUG_UART0
+	bool "UART0"
+config MX53_SELLWOOD_DEBUG_UART1
+	bool "UART1"
+config MX53_SELLWOOD_DEBUG_UART2
+	bool "UART2"
+endchoice
+endif
 endmenu
 
 menu "i.MX specific settings        "

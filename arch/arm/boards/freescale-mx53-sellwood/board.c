@@ -176,7 +176,7 @@ static struct spi_imx_master sellwood_spi_0_data = {
 static const struct spi_board_info sellwood_spi_board_info[] = {
 	{
 		.name = "m25p80",
-		.max_speed_hz = 20000000,
+		.max_speed_hz = 40000000,
 		.bus_num = 0,
 		.chip_select = 0,
 		.mode = SPI_MODE_0,
@@ -211,11 +211,16 @@ device_initcall(sellwood_devices_init);
 
 static int sellwood_part_init(void)
 {
-	//devfs_add_partition("disk0", 0x00000, 0x40000, DEVFS_PARTITION_FIXED, "self0");
-	//devfs_add_partition("disk0", 0x40000, 0x20000, DEVFS_PARTITION_FIXED, "env0");
-	
+#if defined CONFIG_FREESCALE_MX53_SELLWOOD_ENV_SD
+	devfs_add_partition("disk0", 0x00000, 0x40000, DEVFS_PARTITION_FIXED, "self0");
+	devfs_add_partition("disk0", 0x40000, 0x20000, DEVFS_PARTITION_FIXED, "env0");
+#elif defined CONFIG_FREESCALE_MX53_SELLWOOD_ENV_NOR	
 	devfs_add_partition("nor0", 0, SZ_256K, DEVFS_PARTITION_FIXED, "self0");
 	devfs_add_partition("nor0", SZ_256K, SZ_128K, DEVFS_PARTITION_FIXED, "env0");
+#else
+	devfs_add_partition("disk0", 0x00000, 0x40000, DEVFS_PARTITION_FIXED, "self0");
+	devfs_add_partition("disk0", 0x40000, 0x20000, DEVFS_PARTITION_FIXED, "env0");
+#endif
 
 	return 0;
 }
@@ -227,7 +232,15 @@ static int sellwood_console_init(void)
 
 	imx53_init_lowlevel(1000);
 
+#if defined CONFIG_MX53_SELLWOOD_DEBUG_UART0
 	imx53_add_uart0();
+#elif #if defined CONFIG_MX53_SELLWOOD_DEBUG_UART1
+	imx53_add_uart1();
+#elif #if defined CONFIG_MX53_SELLWOOD_DEBUG_UART1
+	imx53_add_uart1();
+#else
+	imx53_add_uart0();
+#endif
 	return 0;
 }
 
