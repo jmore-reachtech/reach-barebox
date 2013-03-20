@@ -176,7 +176,7 @@ static struct spi_imx_master sellwood_spi_0_data = {
 static const struct spi_board_info sellwood_spi_board_info[] = {
 	{
 		.name = "m25p80",
-		.max_speed_hz = 40000000,
+		.max_speed_hz = 20000000,
 		.bus_num = 0,
 		.chip_select = 0,
 		.mode = SPI_MODE_0,
