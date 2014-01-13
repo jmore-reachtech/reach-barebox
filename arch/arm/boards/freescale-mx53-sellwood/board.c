@@ -236,8 +236,8 @@ static int sellwood_console_init(void)
 	imx53_add_uart0();
 #elif defined CONFIG_MX53_SELLWOOD_DEBUG_UART1
 	imx53_add_uart1();
-#elif defined CONFIG_MX53_SELLWOOD_DEBUG_UART1
-	imx53_add_uart1();
+#elif defined CONFIG_MX53_SELLWOOD_DEBUG_UART2
+	imx53_add_uart2();
 #else
 	imx53_add_uart0();
 #endif
